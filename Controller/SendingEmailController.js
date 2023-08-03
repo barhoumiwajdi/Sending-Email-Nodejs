@@ -5,21 +5,20 @@ const nodemailer = require("nodemailer");
 exports.sendemail = async (req, res) => {
 
     const transporter = nodemailer.createTransport({
-        host: "smtp.forwardemail.net",
-        port: 465,
-        secure: true,
+        host: 'smtp.gmail.com',
+        // port: process.env.port,
+        secure: false,
         auth: {
-
-            user: 'REPLACE-WITH-YOUR-ALIAS@YOURDOMAIN.COM',
-            pass: 'REPLACE-WITH-YOUR-GENERATED-PASSWORD'
-        }
+            user: "wajdi.barhoumi26@gmail.com",
+            pass: "uggpeedoyivliars",
+        },
     });
 
     // async..await is not allowed in global scope, must use a wrapper
 
     // send mail with defined transport object
     const info = await transporter.sendMail({
-        from: 'your adresse email', // sender address // sender address
+        from: 'wajdi.barhoumi26@gmail.com', // sender address // sender address
         to: req.body.email, // list of receivers
         subject: "Hello ✔", // Subject line
         text: "Hello world?", // plain text body
@@ -82,6 +81,17 @@ exports.sendingattachement = async (req, res) => {
                 cid: 'uniq-mailtrap.png'
             }
         ]
+        /*
+                attachments: [
+                    {   // utf-8 string as an attachment
+                        filename: 'text.txt',
+                        content: 'Attachments'
+                    },
+                    {
+                        filename: 'logo',
+                        path: 'newlogo.png'
+                    }
+                  ]*/
     };
 
     transport.sendMail(mailOptions, (error, info) => {
